@@ -250,7 +250,7 @@ void Context::newFrame() {
 
     ImGuiIO& io = ImGui::GetIO();
     float deltaTime = _timeline.previousFrameDuration();
-    io.DeltaTime = deltaTime < 0 ? 0 : deltaTime;
+    io.DeltaTime = deltaTime <= 0 ? std::numeric_limits<float>::epsilon() : deltaTime;
 
     /* Fire delayed mouse events. This sets MouseDown both in case the press
        happened in this frame but also if both press and release happened at
