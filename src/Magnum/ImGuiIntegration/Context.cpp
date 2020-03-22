@@ -249,7 +249,8 @@ void Context::newFrame() {
     _timeline.nextFrame();
 
     ImGuiIO& io = ImGui::GetIO();
-    io.DeltaTime = _timeline.previousFrameDuration();
+    float deltaTime = _timeline.previousFrameDuration();
+    io.DeltaTime = deltaTime < 0 ? 0 : deltaTime;
 
     /* Fire delayed mouse events. This sets MouseDown both in case the press
        happened in this frame but also if both press and release happened at
